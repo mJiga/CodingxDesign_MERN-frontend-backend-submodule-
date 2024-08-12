@@ -7,7 +7,7 @@ function Courses() {
       <div className="p-12 flex-grow items-center justify-center">
         <h1 className="text-6xl font-bold p-8">Courses</h1>
         <ClassForm />
-        <ClassCard />
+        <ClassCard className={""} Classification={""} meetingTime={""} />
       </div>
     </div>
   );
