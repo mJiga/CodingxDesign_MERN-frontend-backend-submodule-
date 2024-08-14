@@ -1,14 +1,15 @@
-import ClassCard from "./ClassCard";
 import ClassForm from "./ClassForm";
+import ClassList from "./ClassList";
 
 function Courses() {
   return (
-    <div>
-      <div className="p-12 flex-grow items-center justify-center">
-        <h1 className="text-6xl font-bold p-8">Courses</h1>
-        <ClassForm />
-        <ClassCard className={""} Classification={""} meetingTime={""} />
-      </div>
+    <div className="p-4 md:p-8 lg:p-12 flex-grow">
+      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 text-center">
+        Courses
+      </h1>
+      <ClassForm />
+      <hr className="my-8 border-gray-300" />
+      <ClassList />
     </div>
   );
 }

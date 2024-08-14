@@ -2,10 +2,6 @@ import { Search } from "lucide-react";
 import { useState } from "react";
 
 function ClassForm() {
-  const [desination, setDestination] = useState("");
-  const [arrival, setArrival] = useState("");
-  const [departure, setDeparture] = useState("");
-
   return (
     <div className="border-2 border-opacity-60 border-zinc-300 relative flex items-center max-w-4xl h-20 rounded-3xl shadow-lg overflow-hidden">
       <form className="flex w-full h-full items-center">
@@ -13,7 +9,7 @@ function ClassForm() {
           <span className="text-sm font-extrabold">Classification</span>
           <input
             placeholder="Choose classification"
-            value={desination}
+            value={}
             className="text-xs font-medium text-zinc-500 bg-transparent focus:outline-none focus:text-black w-full group-hover:placeholder-zinc-400"
             required
           />
@@ -23,7 +19,7 @@ function ClassForm() {
           <span className="text-sm font-extrabold">Class</span>
           <input
             placeholder="Input Class name"
-            value={arrival}
+            value={}
             className="text-xs font-medium text-zinc-500 bg-transparent focus:outline-none focus:text-black w-full group-hover:placeholder-zinc-400"
             required
           />
@@ -33,7 +29,7 @@ function ClassForm() {
           <span className="text-sm font-extrabold">Course Number</span>
           <input
             placeholder="Input course number"
-            value={departure}
+            value={}
             className="text-xs font-medium text-zinc-500 bg-transparent focus:outline-none focus:text-black w-full group-hover:placeholder-zinc-400"
             required
           />
