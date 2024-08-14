@@ -43,8 +43,8 @@ const CourseProvider: FC<CourseProviderProps> = ({ children }) => {
   const [courses, setCourses] = useState<Course[]>([]);
 
   useEffect(() => {
-    fetchCourses(), [];
-  });
+    fetchCourses();
+  }, []);
 
   const fetchCourses = async () => {
     try {
