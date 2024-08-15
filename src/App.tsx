@@ -6,10 +6,10 @@ import {
   Navigate,
 } from "react-router-dom";
 import Layout from "./layouts/Layout";
-import Home from "./components/Home/Home";
-import Courses from "./components/Courses/Courses";
-import Calendar from "./components/Calendar/Calendar";
-import Profile from "./components/Profile/Profile";
+import ProfilePage from "./pages/ProfilePage";
+import HomePage from "./pages/HomePage";
+import CoursesPage from "./pages/CoursesPage";
+import CalendarPage from "./pages/CalendarPage";
 
 const App = () => {
   return (
@@ -19,7 +19,7 @@ const App = () => {
           path="/"
           element={
             <Layout>
-              <Home />
+              <HomePage />
             </Layout>
           }
         />
@@ -27,7 +27,7 @@ const App = () => {
           path="/courses"
           element={
             <Layout>
-              <Courses />
+              <CoursesPage />
             </Layout>
           }
         />
@@ -35,7 +35,7 @@ const App = () => {
           path="/calendar"
           element={
             <Layout>
-              <Calendar />
+              <CalendarPage />
             </Layout>
           }
         />
@@ -43,7 +43,7 @@ const App = () => {
           path="/profile"
           element={
             <Layout>
-              <Profile />
+              <ProfilePage />
             </Layout>
           }
         />

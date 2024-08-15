@@ -1,9 +1,9 @@
-import Hero from "./Hero";
-import CourseDisplay from "./CourseDisplay";
-import CalendarDisplay from "./CalendarDisplay";
-import TaskDisplay from "./TaskDisplay";
+import Hero from "../components/Home/Hero";
+import CourseDisplay from "../components/Home/CourseDisplay";
+import CalendarDisplay from "../components/Home/CalendarDisplay";
+import TaskDisplay from "../components/Home/TaskDisplay";
 
-function Home() {
+function HomePage() {
   return (
     <div className="min-h-screen bg-gray-100">
       <Hero />
@@ -24,4 +24,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomePage;
