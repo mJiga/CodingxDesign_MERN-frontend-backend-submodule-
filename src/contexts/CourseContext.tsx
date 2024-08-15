@@ -7,8 +7,10 @@ import {
   useContext,
 } from "react";
 
+// Port for API calls
 const PORT = import.meta.env.VITE_PORT;
 
+// Interface for course data
 interface Course {
   courseName: string;
   classification: string;
@@ -16,20 +18,23 @@ interface Course {
   courseNumber: string;
 }
 
+// Type for Course Context
 interface CourseContextType {
   courses: Course[];
   fetchCourses: () => Promise<void>;
-  getCourse: (className: string) => Promise<void>;
+  getCourse: (courseName: string) => Promise<void>;
   postCourse: (course: Course) => Promise<void>;
   updateCourse: (
-    className: string,
+    courseName: string,
     newInformation: Partial<Course>
   ) => Promise<void>;
-  deleteCourse: (className: string) => Promise<void>;
+  deleteCourse: (courseName: string) => Promise<void>;
 }
 
+// Create a context for course data
 const CourseContext = createContext<CourseContextType | undefined>(undefined);
 
+// Custom hook to use CourseContext
 export const useCourseContext = () => {
   const context = useContext(CourseContext);
   if (context === undefined) {
@@ -37,17 +42,23 @@ export const useCourseContext = () => {
   }
   return context;
 };
+
+// Props type for CourseProvider component
 interface CourseProviderProps {
   children: ReactNode;
 }
 
+// Provider component for course context
 const CourseProvider: FC<CourseProviderProps> = ({ children }) => {
+  // State to hold the list of courses
   const [courses, setCourses] = useState<Course[]>([]);
 
+  // Fetch courses on component mount
   useEffect(() => {
     fetchCourses();
   }, []);
 
+  // Fetch all courses from the server and update state
   const fetchCourses = async () => {
     try {
       const response = await fetch(`http://localhost:${PORT}/course`);
@@ -60,6 +71,7 @@ const CourseProvider: FC<CourseProviderProps> = ({ children }) => {
     }
   };
 
+  // Fetch a specific course by its name
   const getCourse = async (courseName: string) => {
     try {
       const response = await fetch(
@@ -73,6 +85,7 @@ const CourseProvider: FC<CourseProviderProps> = ({ children }) => {
     }
   };
 
+  // Add a new course to the server and refresh the course list
   const postCourse = async (course: Course) => {
     try {
       const response = await fetch(`http://localhost:${PORT}/course`, {
@@ -88,6 +101,7 @@ const CourseProvider: FC<CourseProviderProps> = ({ children }) => {
     }
   };
 
+  // Update an existing course on the server and update local state
   const updateCourse = async (
     courseName: string,
     newInformation: Partial<Course>
@@ -109,6 +123,7 @@ const CourseProvider: FC<CourseProviderProps> = ({ children }) => {
     }
   };
 
+  // Delete a course from the server and update local state
   const deleteCourse = async (courseName: string) => {
     try {
       const response = await fetch(
@@ -127,6 +142,7 @@ const CourseProvider: FC<CourseProviderProps> = ({ children }) => {
     }
   };
 
+  // Update the course details in local state without fetching from server
   const updateLocalCourse = (
     courseName: string,
     newInformation: Partial<Course>
@@ -140,6 +156,7 @@ const CourseProvider: FC<CourseProviderProps> = ({ children }) => {
     );
   };
 
+  // Value to be provided by the context
   const value: CourseContextType = {
     courses,
     fetchCourses,
@@ -149,6 +166,7 @@ const CourseProvider: FC<CourseProviderProps> = ({ children }) => {
     deleteCourse,
   };
 
+  // Render the provider with the given children
   return (
     <CourseContext.Provider value={value}>{children}</CourseContext.Provider>
   );

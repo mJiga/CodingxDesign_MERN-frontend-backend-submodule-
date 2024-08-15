@@ -4,9 +4,12 @@ import utep2 from "../../assets/utep2.jpg";
 function Hero() {
   return (
     <div>
+      {/* Container for centering content and adding padding */}
       <div className="container mx-auto px-20 py-20">
         <div className="flex gap-16 justify-center items-center">
+          {/* Column for text content */}
           <div className="flex flex-col items-start max-w-2xl">
+            {/* Main heading and logo */}
             <span className="flex text-3xl text-black font-bold tracking-tight">
               <h1 className="text-8xl font-bold mb-3">dev.board</h1>
               <PiCode className="ml-2 mt-2 w-20 h-20" />
@@ -14,13 +17,16 @@ function Hero() {
                 @ UTEP
               </label>
             </span>
+            {/* Subheading */}
             <h2 className="text-xl mb-3 ml-2 max-w-lg font-bold">
               Everything in one place:
             </h2>
+            {/* Description */}
             <h3 className="text-xl ml-2 max-w-lg">
               Excel at your CS Course Curriculum @ UTEP
             </h3>
           </div>
+          {/* Image with hover effect */}
           <img
             src={utep2}
             className="w-1/2 h-auto rounded-xl border-4 border-gray-300 shadow-lg transition-transform duration-300 hover:scale-105"

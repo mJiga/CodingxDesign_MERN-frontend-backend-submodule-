@@ -5,6 +5,7 @@ import { MdOutlineEdit } from "react-icons/md";
 import { PiTrashBold } from "react-icons/pi";
 import { useCourseContext } from "../../contexts/CourseContext";
 
+// Define the structure of the course prop
 interface Course {
   courseName: string;
   classification: string;
@@ -12,6 +13,7 @@ interface Course {
   courseNumber: string;
 }
 
+// Functional component to display a single class card
 const ClassCard: FC<Course> = ({
   courseName,
   classification,
@@ -19,8 +21,8 @@ const ClassCard: FC<Course> = ({
   courseNumber,
 }) => {
   const { deleteCourse, updateCourse } = useCourseContext();
-  const [openDrop, setOpenDrop] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
+  const [openDrop, setOpenDrop] = useState(false); // State to manage dropdown menu visibility
+  const [isEditing, setIsEditing] = useState(false); // State to manage editing mode
   const [editedCourseName, setEditedCourseName] = useState(courseName);
   const [editedCourseNumber, setEditedCourseNumber] = useState(courseNumber);
   const [editedClassification, setEditedClassification] =
@@ -29,6 +31,7 @@ const ClassCard: FC<Course> = ({
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  // Function to handle course deletion
   const handleDelete = async () => {
     try {
       await deleteCourse(courseName);
@@ -38,6 +41,7 @@ const ClassCard: FC<Course> = ({
     }
   };
 
+  // Function to handle course update
   const handleUpdate = async () => {
     try {
       await updateCourse(courseName, {
@@ -46,13 +50,14 @@ const ClassCard: FC<Course> = ({
         classification: editedClassification,
         meetingTime: editedMeetingTime,
       });
-      setIsEditing(false);
+      setIsEditing(false); // Exit editing mode after update
     } catch (err) {
       console.error("ERROR UPDATING COURSE");
       throw err;
     }
   };
 
+  // Function to close dropdown menu when clicking outside of it
   const handleClickOutside = (event: MouseEvent) => {
     if (
       dropdownRef.current &&
@@ -62,6 +67,7 @@ const ClassCard: FC<Course> = ({
     }
   };
 
+  // Attach and detach event listener for clicking outside the dropdown
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -89,6 +95,7 @@ const ClassCard: FC<Course> = ({
           </svg>
         </div>
 
+        {/* Dropdown button for actions */}
         <motion.button
           onClick={() => setOpenDrop(!openDrop)}
           whileHover={{ scale: 1.07 }}
@@ -97,6 +104,7 @@ const ClassCard: FC<Course> = ({
           <BsThreeDotsVertical className="hover:text-zinc-500 ml-3 mt-2 transition-all duration-300 ease-in-out" />
         </motion.button>
 
+        {/* Dropdown menu for delete and edit actions */}
         {openDrop && (
           <div
             ref={dropdownRef}
@@ -127,6 +135,7 @@ const ClassCard: FC<Course> = ({
         )}
       </div>
 
+      {/* Course details or edit form */}
       {isEditing ? (
         <div className="space-y-2">
           <input
@@ -134,24 +143,28 @@ const ClassCard: FC<Course> = ({
             value={editedCourseName}
             onChange={(e) => setEditedCourseName(e.target.value)}
             className="w-full p-2 border border-gray-300 rounded-lg"
+            placeholder="Course Name"
           />
           <input
             type="text"
             value={editedCourseNumber}
             onChange={(e) => setEditedCourseNumber(e.target.value)}
             className="w-full p-2 border border-gray-300 rounded-lg"
+            placeholder="Course Number"
           />
           <input
             type="text"
             value={editedClassification}
             onChange={(e) => setEditedClassification(e.target.value)}
             className="w-full p-2 border border-gray-300 rounded-lg"
+            placeholder="Classification"
           />
           <input
             type="text"
             value={editedMeetingTime}
             onChange={(e) => setEditedMeetingTime(e.target.value)}
             className="w-full p-2 border border-gray-300 rounded-lg"
+            placeholder="Meeting Time"
           />
           <div className="flex justify-end space-x-2 mt-2">
             <button

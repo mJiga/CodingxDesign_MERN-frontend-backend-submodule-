@@ -2,21 +2,24 @@ import { Pencil } from "lucide-react";
 import { useState } from "react";
 import { useCourseContext } from "../../contexts/CourseContext";
 
-function ClassForm() {
-  const { postCourse } = useCourseContext();
+// Define the structure of the course object
+interface Course {
+  courseName: string;
+  classification: string;
+  meetingTime: string;
+  courseNumber: string;
+}
 
+function ClassForm() {
+  const { postCourse } = useCourseContext(); // Get the postCourse function from context
+
+  // State variables for form inputs
   const [classification, setClassification] = useState("");
   const [courseName, setCourseName] = useState("");
   const [courseNumber, setCourseNumber] = useState("");
   const [meetingTime, setmeetingTime] = useState("");
 
-  interface Course {
-    courseName: string;
-    classification: string;
-    meetingTime: string;
-    courseNumber: string;
-  }
-
+  // Handle form submission
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     try {
@@ -25,6 +28,7 @@ function ClassForm() {
         return;
       }
 
+      // Create a course object
       const course: Course = {
         courseName,
         classification,
@@ -32,11 +36,14 @@ function ClassForm() {
         courseNumber,
       };
 
+      // Call the postCourse function to submit the course
       await postCourse(course);
     } catch (err) {
       console.error("ERROR REGISTERING COURSE");
       throw err;
     }
+
+    // Clear form fields after successful submission
     setClassification("");
     setCourseName("");
     setCourseNumber("");
@@ -46,6 +53,7 @@ function ClassForm() {
   return (
     <div className="container relative flex items-center justify-center border-2 border-opacity-60 border-zinc-300 max-w-4xl h-20 rounded-3xl shadow-lg overflow-hidden">
       <form onSubmit={handleSubmit} className="flex w-full h-full items-center">
+        {/* Classification input field */}
         <label className="group flex-1 h-full flex flex-col justify-center px-6 border-r border-zinc-300 hover:bg-zinc-100 transition-colors ease-in-out duration-300 cursor-pointer">
           <span className="text-sm font-extrabold">Classification</span>
           <input
@@ -57,6 +65,7 @@ function ClassForm() {
           />
         </label>
 
+        {/* Course Name input field */}
         <label className="group flex-1 h-full flex flex-col justify-center px-6 border-r border-zinc-300 hover:bg-zinc-100 transition-colors ease-in-out duration-300 cursor-pointer">
           <span className="text-sm font-extrabold">Course</span>
           <input
@@ -68,6 +77,7 @@ function ClassForm() {
           />
         </label>
 
+        {/* Course Number input field */}
         <label className="group flex-1 h-full flex flex-col justify-center px-6 border-r border-zinc-300 hover:bg-zinc-100 transition-colors ease-in-out duration-300 cursor-pointer">
           <span className="text-sm font-extrabold">Course Number</span>
           <input
@@ -79,6 +89,7 @@ function ClassForm() {
           />
         </label>
 
+        {/* Meeting Time input field */}
         <label className="group flex-1 h-full flex flex-col justify-center px-6 hover:bg-zinc-100 transition-colors ease-in-out duration-300 cursor-pointer">
           <span className="text-sm font-extrabold">Meeting Times</span>
           <input
@@ -90,6 +101,7 @@ function ClassForm() {
           />
         </label>
 
+        {/* Submit button */}
         <button className="h-full bg-blue-800 text-white font-bold text-base px-8 hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center">
           <Pencil className="mr-2 w-5 stroke-white" />
           Register
