@@ -6,8 +6,10 @@ import {
   Navigate,
 } from "react-router-dom";
 import Layout from "./layouts/Layout";
-import Hero from "./components/Hero";
+import Home from "./components/Home/Home";
 import Courses from "./components/Courses/Courses";
+import Calendar from "./components/Calendar/Calendar";
+import Profile from "./components/Profile/Profile";
 
 const App = () => {
   return (
@@ -17,7 +19,7 @@ const App = () => {
           path="/"
           element={
             <Layout>
-              <Hero />
+              <Home />
             </Layout>
           }
         />
@@ -26,6 +28,22 @@ const App = () => {
           element={
             <Layout>
               <Courses />
+            </Layout>
+          }
+        />
+        <Route
+          path="/calendar"
+          element={
+            <Layout>
+              <Calendar />
+            </Layout>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <Layout>
+              <Profile />
             </Layout>
           }
         />
