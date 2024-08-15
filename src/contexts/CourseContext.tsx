@@ -94,7 +94,7 @@ const CourseProvider: FC<CourseProviderProps> = ({ children }) => {
       const response = await fetch(
         `http://localhost:7000/courses/${courseName}`,
         {
-          method: "POST",
+          method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(newInformation),
         }
