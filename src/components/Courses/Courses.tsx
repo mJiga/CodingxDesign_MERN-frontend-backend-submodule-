@@ -3,7 +3,7 @@ import ClassList from "./ClassList";
 
 function Courses() {
   return (
-    <div className="p-4 md:p-8 lg:p-12 flex-grow">
+    <div className="p-4 md:p-8 lg:p-12 flex flex-col justify-center items-center space-y-4">
       <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 text-center">
         Courses
       </h1>

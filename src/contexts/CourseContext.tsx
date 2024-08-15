@@ -7,9 +7,11 @@ import {
   useContext,
 } from "react";
 
+const PORT = import.meta.env.VITE_PORT;
+
 interface Course {
   courseName: string;
-  classification: number;
+  classification: string;
   meetingTime: string;
   courseNumber: string;
 }
@@ -48,7 +50,7 @@ const CourseProvider: FC<CourseProviderProps> = ({ children }) => {
 
   const fetchCourses = async () => {
     try {
-      const response = await fetch("http://localhost:7000/courses");
+      const response = await fetch(`http://localhost:${PORT}/course`);
       if (!response.ok) throw new Error("Network response failed");
       const data = await response.json();
       setCourses(data);
@@ -61,7 +63,7 @@ const CourseProvider: FC<CourseProviderProps> = ({ children }) => {
   const getCourse = async (courseName: string) => {
     try {
       const response = await fetch(
-        `http://localhost:7000/courses/${courseName}`
+        `http://localhost:${PORT}/courses/${courseName}`
       );
       if (!response.ok) throw new Error("Network response failed");
       return await response.json();
@@ -73,7 +75,7 @@ const CourseProvider: FC<CourseProviderProps> = ({ children }) => {
 
   const postCourse = async (course: Course) => {
     try {
-      const response = await fetch("http://localhost:7000/courses", {
+      const response = await fetch(`http://localhost:${PORT}/course`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(course),
@@ -92,7 +94,7 @@ const CourseProvider: FC<CourseProviderProps> = ({ children }) => {
   ) => {
     try {
       const response = await fetch(
-        `http://localhost:7000/courses/${courseName}`,
+        `http://localhost:${PORT}/course/${courseName}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -110,7 +112,7 @@ const CourseProvider: FC<CourseProviderProps> = ({ children }) => {
   const deleteCourse = async (courseName: string) => {
     try {
       const response = await fetch(
-        `http://localhost:7000/courses/${courseName}`,
+        `http://localhost:${PORT}/course/${courseName}`,
         {
           method: "DELETE",
         }
